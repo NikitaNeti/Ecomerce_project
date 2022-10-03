@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	
+	<section id="form"><!--form-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-1">
+					<div class="login-form"><!--login form-->
+						<h2>Login to your account</h2>
+						<form  method="POST"  action="" novalidate>
+							{% csrf_token %}
+							{% if form.non_field_errors %}
+								{% for error in form.non_field_errors %}
+									<p class="er" style="color: red;">{{error}}</p>
+								{% endfor %}
+							{% endif %}
+
+							{% for fm in form %}
+								{{fm.label_tag}} {{fm}} {{fm.errors|striptags}}
+							{% endfor %}
+							
+							<!-- <input type="text" placeholder="Name" />
+							<input type="email" placeholder="Email Address" /> -->
+							<span>
+								<input type="checkbox" class="checkbox"> 
+								Keep me signed in
+							</span>
+							<button type="submit" class="btn btn-default">Login</button>
+						</form>
+					</div><!--/login form-->
+				</div>
+
+				
+			</div>
+		</div>
+	</section><!--/form-->
+
+{% endblock content %}
+	
+	
