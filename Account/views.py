@@ -1,5 +1,5 @@
 
-from http.client import HTTPResponse
+# from http.client import HTTPResponse
 from django.shortcuts import render, redirect ,HttpResponseRedirect
 from Account.forms import SignupForm
 from django.contrib.auth import login,logout,authenticate
@@ -7,9 +7,9 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 
 
-def loginpage(request):
-    context={}
-    return render (request, 'login.html',context)
+# def loginpage(request):
+#     context={}
+#     return render (request,'login.html',context)
 
 
 def User_Register(request):
@@ -19,6 +19,7 @@ def User_Register(request):
         if form.is_valid():
             user = form.save()
             user.set_password(password)
+            user.save()
             login(request,user)
             messages.success(request,'Account Created Successfully !')
 
@@ -33,9 +34,10 @@ def user_login(request):
     if request.method == "POST":
         fm = AuthenticationForm(request=request, data = request.POST)
         if fm.is_valid():
-            uemail = fm.cleaned_data['email']
+            uemail = fm.cleaned_data['username']
             upass = fm.cleaned_data['password']
-            user = authenticate(Email= uemail,password=upass)
+     
+            user = authenticate(email= uemail,password=upass)
             if user is not None:
                 login(request,user)
                 return  HttpResponseRedirect('/profile/')

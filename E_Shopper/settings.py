@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'E_Shop',
     'Account',
+    'Product',
+    'mptt',
 ]
 
 AUTH_USER_MODEL = "Account.User"
